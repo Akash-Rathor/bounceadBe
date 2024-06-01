@@ -1,0 +1,15 @@
+*.pyc
+*~
+*.swp
+CGenv
+.vscode
+.idea
+.DS_Store
+.env
+logs
+*venv
+env
+*workfors
+node_modules
+workforsbe/staticfiles/*
+*pem
