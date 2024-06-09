@@ -6,6 +6,7 @@ CGenv
 .idea
 .DS_Store
 .env
+.venv
 logs
 *venv
 env

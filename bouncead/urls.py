@@ -13,20 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from django.conf.urls import include
-from backend.views import (healthCheck,user)
+from backend.views import healthCheck, user, register
 from bouncead.settings import Endpoints
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('hcheck',healthCheck.health_check),
-    path('api/', include([
-        path(Endpoints.GENERATE_OTP.value, user.otp_view),
-        path(Endpoints.VERIFY_OTP.value, user.otp_view),
-    ]))
+    path("admin/", admin.site.urls),
+    path("hcheck", healthCheck.health_check),
+    path(
+        "api/",
+        include(
+            [
+                path(Endpoints.GENERATE_OTP.value, user.otp_view),
+                path(Endpoints.VERIFY_OTP.value, user.otp_view),
+                path(Endpoints.REGISTER.value, register.RegistrationView.as_view(), name="register"),
+            ]
+        ),
+    ),
 ]
 
 if settings.DEBUG:

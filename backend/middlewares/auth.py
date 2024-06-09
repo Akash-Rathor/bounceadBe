@@ -28,6 +28,7 @@ class AuthMiddleware:
                 "/hcheck",
                 '/api/' + Endpoints.GENERATE_OTP.value,
                 '/api/' + Endpoints.VERIFY_OTP.value,
+                '/api/' + Endpoints.REGISTER.value,
             ]
 
             admin_endpoints = '/admin'
