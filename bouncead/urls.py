@@ -21,6 +21,10 @@ from django.urls import path
 from django.conf.urls import include
 from backend.views import healthCheck, user, register
 from bouncead.settings import Endpoints
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -32,6 +36,9 @@ urlpatterns = [
                 path(Endpoints.GENERATE_OTP.value, user.otp_view),
                 path(Endpoints.VERIFY_OTP.value, user.otp_view),
                 path(Endpoints.REGISTER.value, register.RegistrationView.as_view(), name="register"),
+                path(Endpoints.TOKEN.value, TokenObtainPairView.as_view(), name="token_obtain_pair"),
+                path(Endpoints.TOKEN_REFRESH.value, TokenRefreshView.as_view(), name="token_refresh"),
+                path(Endpoints.LOGIN.value, register.LoginView.as_view(), name="login"),
             ]
         ),
     ),

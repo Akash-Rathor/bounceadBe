@@ -29,6 +29,7 @@ class AuthMiddleware:
                 '/api/' + Endpoints.GENERATE_OTP.value,
                 '/api/' + Endpoints.VERIFY_OTP.value,
                 '/api/' + Endpoints.REGISTER.value,
+                '/api/' + Endpoints.LOGIN.value,
             ]
 
             admin_endpoints = '/admin'

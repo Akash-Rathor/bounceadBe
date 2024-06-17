@@ -5,6 +5,9 @@ class Endpoints(enum.Enum):
     GENERATE_OTP = "otp"
     VERIFY_OTP = "otp/verify"
     REGISTER = "register"
+    TOKEN = "token"
+    TOKEN_REFRESH = "token/refresh"
+    LOGIN = "login"
 
 
 BLOCKED_TIMER = 12 * 60 * 60  # 12 hours
