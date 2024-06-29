@@ -123,7 +123,7 @@ LOGGING = {
 		'file': {
 			'level': LOGGING_LEVEL,
 			'class': 'logging.handlers.TimedRotatingFileHandler',
-			'filename': os.path.join(BASE_DIR,'logs/pragati.log'),
+			'filename': os.path.join(BASE_DIR,'logs/bouncead.log'),
 			'formatter': 'simple' if LOG_WHERE=='local' else 'verbose',
 			'when': 'midnight',
 			'interval': 1,

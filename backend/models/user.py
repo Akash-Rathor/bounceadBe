@@ -18,7 +18,7 @@ user_active_status = [
     ('Deleted','Deleted'),
     ('OtpVerified','OtpVerified'),
 ]
-class User(AbstractBaseUser):
+class User(AbstractBaseUser): #company
     REQUIRED_FIELDS = ('mobile')
     USERNAME_FIELD = 'mobile'
     
@@ -27,28 +27,14 @@ class User(AbstractBaseUser):
     name = models.CharField(max_length=100,null=True,db_index=True)
     email = models.CharField(max_length=100, blank=True, null=True,unique=True)
     mobile = models.CharField(max_length=10,unique=True)
-    user_type = models.CharField(max_length=20,choices=[('Company','Company')],default='User')
+    # user_type = models.CharField(max_length=20,choices=[('Company','Company')],default='User')
     status = models.CharField(max_length=20,choices=user_active_status,default='OtpInitialized')
-    device_token = models.CharField(max_length=255, blank=True, null=True)
     password = models.CharField(max_length=255, blank=True, null=True)
     last_login = models.DateTimeField(blank=True, null=True)
-    otp = models.PositiveIntegerField(blank=True, null=True)
-    otp_generated_at = models.PositiveBigIntegerField(blank=True, null=True)
-    otp_valid_till = models.PositiveBigIntegerField(blank=True, null=True)
-    blocked_till = models.PositiveBigIntegerField(blank=True, null=True)
     successive_login_failure_count = models.PositiveIntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.BooleanField(default=False)
     profile_pic = models.CharField(max_length=500, blank=True, null=True)
     
-    
-    def __str__(self):
-        return f"{self.user_type} | {self.name} | {self.mobile} | {self.email}"
-    
-    @property
-    def is_authenticated(self):
-        return True if self.id else False
-    
     class Meta:
-        unique_together = [('mobile','user_type','email')]
+        unique_together = [('mobile','email')]

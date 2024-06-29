@@ -15,7 +15,7 @@ from backend.queries.user import UserQuery
 
 
 class AuthMiddleware:
-
+ 
     def __init__(self, get_response):
         self.get_response = get_response
         # One-time configuration and initialization.
@@ -30,9 +30,6 @@ class AuthMiddleware:
                 '/api/' + Endpoints.VERIFY_OTP.value,
             ]
 
-            admin_endpoints = '/admin'
-            blogs_endpoints = '/blogs'
-
             excluded_dynamic_endpoints = [
 
             ]
@@ -41,9 +38,6 @@ class AuthMiddleware:
             ]
 
             is_excluded = False
-
-            if admin_endpoints in request.path or blogs_endpoints in request.path:
-                is_excluded = True
 
             for endpoint in excluded_dynamic_endpoints:
                 is_excluded = self.is_excluded(
