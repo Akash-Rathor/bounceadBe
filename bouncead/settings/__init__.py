@@ -4,7 +4,7 @@ import os
 
 # if os.environ['APP_ENV'] == 'prod':
 #    from .prod import *
-   
+
 # elif os.environ['APP_ENV'] == 'pre-prod':
 #     from .uat import *
 
@@ -14,7 +14,7 @@ import os
 # else:
 from .dev import *
 
-REDIS_LOCATION = os.getenv('REDIS_LOCATION')
+REDIS_LOCATION = os.getenv("REDIS_LOCATION")
 
 # if CACHE_ENABLE:
 # 	CACHES = {
@@ -32,4 +32,4 @@ REDIS_LOCATION = os.getenv('REDIS_LOCATION')
 # 		}
 # 	}
 # 	CACHE_TTL = None
-	# CACHE_TTL = 24*60*60 #1 day
+# CACHE_TTL = 24*60*60 #1 day
