@@ -6,23 +6,31 @@ import time
 from backend.utils.exceptions.http_exception import BadRequestError
 from backend.queries.api_call_log import ApiCallLogQuery
 
-"""Return json response"""
+
 def respond(data, msg=""):
-    return JsonResponse({"msg": msg, "data": data}, status=status.HTTP_200_OK )
+    """Return success json response"""
+    return JsonResponse({"msg": msg, "data": data}, status=status.HTTP_200_OK)
+
 
 def respond_201(data, msg=""):
+    """Return created json response"""
     return JsonResponse({"msg": msg, "data": data}, status=status.HTTP_201_CREATED)
 
-"""Return json response with just message"""
+
 def respond_with_msg(msg=""):
+    """Return json response with just message"""
     return respond(None, msg)
 
-"""Return json response with just message and status code"""
-def respond_with_error(msg="",status=status.HTTP_400_BAD_REQUEST):
+
+def respond_with_error(msg="", status=status.HTTP_400_BAD_REQUEST):
+    """Return json response with error message and status code"""
+
     return JsonResponse({"msg": msg}, status=status)
+
 
 def respond_just_json(data):
     return JsonResponse(data)
+
 
 def execute_with_retry_decorator(my_method):
     max_retries = 3
@@ -37,6 +45,6 @@ def execute_with_retry_decorator(my_method):
                     time.sleep(delay)
                     return execute_my_method(args, kwargs)
                 else:
-                    raise BadRequestError('Please try again later')
+                    raise BadRequestError("Please try again later")
 
     return execute_my_method

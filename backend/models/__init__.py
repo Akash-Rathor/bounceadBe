@@ -1,1 +1,1 @@
-from .user import User
+from .user import CompanyUser  # noqa:F401
