@@ -32,6 +32,7 @@ urlpatterns = [
                 path(Endpoints.GENERATE_OTP.value, user.otp_view),
                 path(Endpoints.VERIFY_OTP.value, user.otp_view),
                 path(Endpoints.REGISTER.value, account.register_view),
+                path(Endpoints.LOGIN.value, account.login_view),
             ]
         ),
     ),

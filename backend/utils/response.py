@@ -7,7 +7,7 @@ from backend.utils.exceptions.http_exception import BadRequestError
 from backend.queries.api_call_log import ApiCallLogQuery
 
 
-def respond(data, msg=""):
+def respond_200(data, msg=""):
     """Return success json response"""
     return JsonResponse({"msg": msg, "data": data}, status=status.HTTP_200_OK)
 
@@ -19,7 +19,7 @@ def respond_201(data, msg=""):
 
 def respond_with_msg(msg=""):
     """Return json response with just message"""
-    return respond(None, msg)
+    return respond_200(None, msg)
 
 
 def respond_with_error(msg="", status=status.HTTP_400_BAD_REQUEST):

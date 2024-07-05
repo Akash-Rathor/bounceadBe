@@ -101,7 +101,13 @@ class UserQuery:
         user_serializer = UserSerializer(data=data)
         user_serializer.is_valid(raise_exception=True)
         validated_data = user_serializer.validated_data
-        email = user_serializer.validated_data.pop("email")
+        email = user_serializer.validated_data.pop("email").lower()
         password = user_serializer.validated_data.pop("password")
         user = self.queryset.create_user(email, password, **validated_data)
+        return user
+
+    def authenticate_user(self, data):
+        username = data.get("username").lower()
+        password = data.get("password")
+        user = self.queryset.authenticate(username, password)
         return user

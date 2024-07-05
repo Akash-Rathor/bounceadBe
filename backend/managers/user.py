@@ -33,29 +33,25 @@ class UserManager(BaseUserManager, models.Manager):
         user.save()
         return user
 
-    def authenticate(self, request, username=None, password=None, **kwargs):
+    def authenticate(self, username=None, password=None, **kwargs):
         # Based on the user type, authenticate with different fields
         if len(username) == 10 and "@" not in str(username):
-            user_type = "User"
-        else:
-            user_type = "Company"
-
-            if user_type == "User":
-                # Authenticate with mobile number
-                try:
-                    user = self.get(mobile=username)
+            try:
+                user = self.get(mobile=username)
+                if user and user.check_password(password):
                     return user
-                except self.model.DoesNotExist:
-                    return None
+                return user
+            except self.model.DoesNotExist:
+                return None
 
-            elif user_type == "Company":
-                # Authenticate with email
-                try:
-                    user = self.get(email=username)
-                    if user and user.check_password(password):
-                        return user
-                except self.model.DoesNotExist:
-                    return None
+        else:
+            # Authenticate with email
+            try:
+                user = self.get(email=username)
+                if user and user.check_password(password):
+                    return user
+            except self.model.DoesNotExist:
+                return None
 
         # If none of the above conditions are met, return None
         return None
