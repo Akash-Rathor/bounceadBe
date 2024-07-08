@@ -94,11 +94,23 @@ WSGI_APPLICATION = "bouncead.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("DB_DATABASE"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': int(os.getenv("DB_PORT")),
+        'USER': os.getenv("DB_USERNAME"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'CONN_HEALTH_CHECKS': True
+    },
 }
 
 ##Logging
