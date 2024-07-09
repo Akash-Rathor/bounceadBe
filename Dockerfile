@@ -34,7 +34,7 @@ RUN python manage.py collectstatic --noinput
 COPY nginx.conf /etc/nginx/sites-available/default
 
 # Expose port
-EXPOSE 80
+EXPOSE 443
 
 # Start Gunicorn and Nginx
 CMD gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g "daemon off;"
