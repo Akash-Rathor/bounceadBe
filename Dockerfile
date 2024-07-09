@@ -11,18 +11,14 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /code
 
-# # Copy .env file
-# COPY .env .env
-
 # Install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    libpq-dev \
-    nginx \
-    gcc \
-    libc-dev && \
-    rm -rf /var/lib/apt/lists/*
-
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        nginx \
+        gcc \
+        libc-dev \
+        libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt /code/
@@ -38,7 +34,7 @@ RUN python manage.py collectstatic --noinput
 COPY nginx.conf /etc/nginx/sites-available/default
 
 # Expose port
-EXPOSE 80
+EXPOSE 8000
 
-# Start Gunicorn and Nginx separately
+# Start Gunicorn and Nginx
 CMD gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g "daemon off;"
