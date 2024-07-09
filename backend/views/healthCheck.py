@@ -9,6 +9,6 @@ def health_check(request):
     data = {
         "status": "OK", 
         "current date and time": datetime.get_date_time(),
-        "current date and time": datetime.get_date_time()
+        "current date time in epoch": datetime.get_unix_timestamp()
         }
     return Response(data=data, status=status.HTTP_200_OK)
