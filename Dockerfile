@@ -5,8 +5,8 @@ FROM python:3.9-slim
 RUN pip install --upgrade pip
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set work directory
 WORKDIR /code
@@ -34,7 +34,7 @@ RUN python manage.py collectstatic --noinput
 COPY nginx.conf /etc/nginx/sites-available/default
 
 # Expose port
-EXPOSE 8000
+EXPOSE 80
 
 # Start Gunicorn and Nginx
-CMD gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g "daemon off;"
+CMD ["sh", "-c", "gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g 'daemon off;'"]
