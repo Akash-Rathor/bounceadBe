@@ -13,9 +13,16 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import newrelic.agent
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print('====================== BASE_DIR =====================' ,BASE_DIR)
+#new relic setup
+newrelic_ini_path = os.path.join(BASE_DIR, 'newrelic.ini')
+newrelic.agent.initialize(newrelic_ini_path)
+
 
 load_dotenv()
 

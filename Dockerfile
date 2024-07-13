@@ -24,6 +24,9 @@ RUN apt-get update \
 COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install New Relic agent
+RUN pip install newrelic==9.12.0
+
 # Copy the Django project
 COPY . /code/
 
@@ -33,8 +36,11 @@ RUN python manage.py collectstatic --noinput
 # Copy Nginx configuration
 COPY nginx.conf /etc/nginx/sites-available/default
 
+# Copy New Relic configuration
+COPY bouncead/newrelic.ini /code/newrelic.ini
+
 # Expose port
 EXPOSE 80
 
-# Start Gunicorn and Nginx
-CMD ["sh", "-c", "gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g 'daemon off;'"]
+# Start Gunicorn with New Relic and Nginx
+CMD ["sh", "-c", "newrelic-admin run-program gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g 'daemon off;'"]
