@@ -126,6 +126,8 @@ LOGGING_LEVEL = "INFO"
 LOG_WHERE = os.getenv("LOG_WHERE")
 directory_path = "bouncead/logs"
 os.makedirs(directory_path, exist_ok=True)
+
+#  new logger below for console logging every environments
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -144,17 +146,18 @@ LOGGING = {
             "level": LOGGING_LEVEL,
             "class": "logging.handlers.TimedRotatingFileHandler",
             "filename": os.path.join(BASE_DIR, "logs/bouncead.log"),
-            "formatter": "simple" if LOG_WHERE == "local" else "verbose",
+            "formatter":"verbose",
             "when": "midnight",
             "interval": 1,
         },
         "console": {
             "level": "DEBUG",
-            "class": "logging.StreamHandler" if LOG_WHERE == "local" else "logging.NullHandler",
+            "class": "logging.StreamHandler",
+            "formatter":"verbose"
         },
     },
     "root": {
-        "handlers": ["console"] if LOG_WHERE == "local" else ["file"],
+        "handlers": ["console"],
         "level": LOGGING_LEVEL,
     },
     "loggers": {
@@ -165,6 +168,47 @@ LOGGING = {
         },
     },
 }
+#  old logger below based on file logging and on server and console logging in local.
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "verbose": {
+#             "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+#             "style": "{",
+#         },
+#         "simple": {
+#             "format": "{levelname} {message}",
+#             "style": "{",
+#         },
+#     },
+#     "handlers": {
+#         "file": {
+#             "level": LOGGING_LEVEL,
+#             "class": "logging.handlers.TimedRotatingFileHandler",
+#             "filename": os.path.join(BASE_DIR, "logs/bouncead.log"),
+#             "formatter": "simple" if LOG_WHERE == "local" else "verbose",
+#             "when": "midnight",
+#             "interval": 1,
+#         },
+#         "console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler" if LOG_WHERE == "local" else "logging.NullHandler",
+#             "formatter":"simple"
+#         },
+#     },
+#     "root": {
+#         "handlers": ["console"] if LOG_WHERE == "local" else ["file"],
+#         "level": LOGGING_LEVEL,
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["console", "file"],
+#             "level": LOGGING_LEVEL,
+#             "propagate": True,
+#         },
+#     },
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

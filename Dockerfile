@@ -43,4 +43,4 @@ COPY bouncead/newrelic.ini /code/newrelic.ini
 EXPOSE 80
 
 # Start Gunicorn with New Relic and Nginx
-CMD ["sh", "-c", "newrelic-admin run-program gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "python manage.py migrate && newrelic-admin run-program gunicorn bouncead.wsgi:application --bind 0.0.0.0:8000 & nginx -g 'daemon off;'"]
