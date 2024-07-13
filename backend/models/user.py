@@ -17,6 +17,7 @@ user_active_status = [
 
 
 class CompanyUser(AbstractBaseUser):  # company
+    USERNAME_FIELD = "email"
 
     objects = UserManager()
 

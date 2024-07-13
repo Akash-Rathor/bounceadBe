@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from django.conf.urls import include
-from backend.views import healthCheck, user, account
+from backend.views import healthCheck, user, account, ads
 from bouncead.settings import Endpoints
 
 urlpatterns = [
@@ -33,6 +33,10 @@ urlpatterns = [
                 path(Endpoints.VERIFY_OTP.value, user.otp_view),
                 path(Endpoints.REGISTER.value, account.register_view),
                 path(Endpoints.LOGIN.value, account.login_view),
+                path(Endpoints.LOCATION.value+"/<int:id>", ads.location_view),
+                path(Endpoints.LOCATION.value, ads.location_view),
+                path(Endpoints.AD_CAMPAIGN.value+"/<int:id>", ads.ad_campaign_view),
+                path(Endpoints.AD_CAMPAIGN.value, ads.ad_campaign_view),
             ]
         ),
     ),
