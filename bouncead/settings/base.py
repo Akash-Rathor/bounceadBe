@@ -142,18 +142,10 @@ LOGGING = {
         },
     },
     "handlers": {
-        "file": {
-            "level": LOGGING_LEVEL,
-            "class": "logging.handlers.TimedRotatingFileHandler",
-            "filename": os.path.join(BASE_DIR, "logs/bouncead.log"),
-            "formatter":"verbose",
-            "when": "midnight",
-            "interval": 1,
-        },
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "formatter":"verbose"
+            "formatter": "verbose",
         },
     },
     "root": {
@@ -162,7 +154,7 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["console", "file"],
+            "handlers": ["console"],
             "level": LOGGING_LEVEL,
             "propagate": True,
         },
