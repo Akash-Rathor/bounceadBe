@@ -6,6 +6,8 @@ class Endpoints(enum.Enum):
     VERIFY_OTP = "otp/verify"
     LOGIN = "login"
     REGISTER = "register"
+    LOCATION = "location"
+    AD_CAMPAIGN = "adcampaign"
 
 
 BLOCKED_TIMER = 12 * 60 * 60  # 12 hours
