@@ -4,6 +4,9 @@
 
 - Akash Rathor
 
+## Demo
+https://github.com/Akash-Rathor/bounceadBe/blob/dev/screen-capture.mp4
+
 ## Getting started
 
 To make it easy for you to get started with this project, here's a list of recommended next steps.
